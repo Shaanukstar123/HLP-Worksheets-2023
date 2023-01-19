@@ -4,10 +4,35 @@
 
 // top-level subfunctions of polarToCartesianApprox (if any)
 
+
 /// answer to Tick1
 // the header given here is correct.
-let polarToCartesianApprox (r,theta) n = 
-    failwithf "Tick1 not yet implemented" // replace this line with your top-level implementation
+let polarToCartesianApprox (r,theta) n =
+
+    let fact (i:float) =
+        if n = 0
+        then 1.0
+        else List.reduce (*) [1.0..i]
+
+    let sin (x:float) n =
+        let sinterm i = 
+            (((-1.0)**i) * ((x**((2.0*n)+1.0))/(fact (2.0*(float n))+1.0)))
+        
+        List.map sinterm [0..float n]|> List.reduce (+)
+
+    let cos (x:float) n=
+
+        let costerm i = 
+            (((float -1)**i) * ((float x**(float 2*n))/(fact (float 2*n))))
+    
+        List.map costerm [0.. float n]|> List.reduce (+)
+    
+    let y = r*(sin theta n)
+    let x = r*(cos theta n)
+        
+    (x,y)
+
+    //failwithf "Tick1 not yet implemented" // replace this line with your top-level implementation
 
 
 //--------------------testbench code - DO NOT CHANGE-----------------------------//
