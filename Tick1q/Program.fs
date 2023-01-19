@@ -28,7 +28,7 @@ let polarToCartesianApprox (r,theta) (n:int) =
         if n = 0.0 then 1.0
         else
             let costerm i =
-                printfn "%A" ((((-1.0)**i) * ((x**(2.0 *i))))/(fact (2.0*i)))
+                //printfn "%A" ((((-1.0)**i) * ((x**(2.0 *i))))/(fact (2.0*i)))
                 (((-1.0)**i) * ((x**(2.0 *i))))/(fact (2.0*i))
         
             List.map costerm [0.. n-1.0]|> List.reduce (+)
