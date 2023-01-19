@@ -7,25 +7,31 @@
 
 /// answer to Tick1
 // the header given here is correct.
-let polarToCartesianApprox (r,theta) n =
+let polarToCartesianApprox (r,theta) (n:int) =
 
-    let fact (i:float) =
-        if n = 0
+    let fact i =
+        if i = 0.0
         then 1.0
         else List.reduce (*) [1.0..i]
 
     let sin (x:float) n =
-        let sinterm i = 
-            (((-1.0)**i) * ((x**((2.0*n)+1.0))/(fact (2.0*(float n))+1.0)))
-        
-        List.map sinterm [0..float n]|> List.reduce (+)
+        if n = 0.0 then 0.0
+        else
+            if n = 1.0 then x
+            else
+                let sinterm i =
+                    (((-1.0)**i) * ((x**((2.0*i)+1.0))))/(fact ((2.0*(i))+1.0))
+                
+                List.map sinterm [0..n-2.0]|> List.reduce (+)
 
     let cos (x:float) n=
-
-        let costerm i = 
-            (((float -1)**i) * ((float x**(float 2*n))/(fact (float 2*n))))
-    
-        List.map costerm [0.. float n]|> List.reduce (+)
+        if n = 0.0 then 1.0
+        else
+            let costerm i =
+                printfn "%A" ((((-1.0)**i) * ((x**(2.0 *i))))/(fact (2.0*i)))
+                (((-1.0)**i) * ((x**(2.0 *i))))/(fact (2.0*i))
+        
+            List.map costerm [0.. n-1.0]|> List.reduce (+)
     
     let y = r*(sin theta n)
     let x = r*(cos theta n)
